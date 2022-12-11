@@ -27,22 +27,5 @@ public interface BoardService {
     //    최신글 조회
     public List<BoardDTO> recentPost();
     //    카테고리별 조회
-    public List<BoardDTO> categoryPost(String category);
-
-    ////    카테고리별 조회
-//    국어
-    public List<BoardDTO> koreanPost();
-    //    수학
-    public List<BoardDTO> mathPost();
-    //    영어
-    public List<BoardDTO> englishPost();
-    //    사탐
-    public List<BoardDTO> societyPost();
-    //    과탐
-    public List<BoardDTO> sciencePost();
-    //    한국사
-    public List<BoardDTO> historyPost();
-    //    제2외국어
-    public List<BoardDTO> foreignPost();
-
+    public List<BoardDTO> categoryPost(String boardCategory);
 }

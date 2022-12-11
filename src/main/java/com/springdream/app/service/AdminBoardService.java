@@ -61,38 +61,4 @@ public class AdminBoardService implements BoardService{
     @Override
     public List<BoardDTO> categoryPost(String category) { return boardDAO.categoryPost(category); }
 
-    public List<BoardDTO> koreanPost() {
-        return null;
-    }
-
-    @Override
-    public List<BoardDTO> mathPost() {
-        return null;
-    }
-
-    @Override
-    public List<BoardDTO> englishPost() {
-        return null;
-    }
-
-    @Override
-    public List<BoardDTO> societyPost() {
-        return null;
-    }
-
-    @Override
-    public List<BoardDTO> sciencePost() {
-        return null;
-    }
-
-    @Override
-    public List<BoardDTO> historyPost() {
-        return null;
-    }
-
-    @Override
-    public List<BoardDTO> foreignPost() {
-        return null;
-    }
-
 }
