@@ -2,6 +2,7 @@ package com.springdream.app.repository;
 
 import com.springdream.app.domain.BoardDTO;
 import com.springdream.app.domain.BoardVO;
+import com.springdream.app.domain.Criteria;
 import com.springdream.app.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -37,9 +38,13 @@ public class BoardDAO {
         return boardMapper.selectMemberAll(memberNumber);}
 
     //    전체 조회
-    public List<BoardDTO> findAll(){
-        return boardMapper.selectAll();
+    public List<BoardDTO> findAll(Criteria criteria){
+        return boardMapper.selectAll(criteria);
     }
+
+    //게시글 전체 갯수 조회
+    public int countTotal() { return boardMapper.countTotal(); };
+
     //    신고되지 않은 게시물 조회
     public List<BoardDTO> findUnreportAll(){
         return boardMapper.selectUnreportAll();

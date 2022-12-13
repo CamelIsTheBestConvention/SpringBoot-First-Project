@@ -119,13 +119,13 @@
           </div>
           <!-- 페이지 버튼 -->
           <div th:object="${pagination}">
-            <div style="text-align: center">
-              <a class="changePage" th:href="*{startPage - 1}" th:if="*{prev}"><code><</code></a>
+            <div class="paging" style="text-align: center">
+              <a class="changePage" th:href="*{startPage - 1}" th:if="*{prev}" style="color: black"><code><</code></a>
               <th:block th:each="page:${#numbers.sequence(pagination.startPage, pagination.endPage)}">
                 <a class="changePage" style="color: black" th:href="${page}" th:if="${pagination.criteria.page != page}"><code th:text="${page}"></code></a>
-                <code th:unless="${pagination.criteria.page != page}" th:text="${page}"></code>
+                <code id="currentPage" th:unless="${pagination.criteria.page != page}" th:text="${page}"></code>
               </th:block>
-              <a class="changePage" th:href="*{endPage + 1}" th:if="*{next}"><code>></code></a>
+              <a class="changePage" th:href="*{endPage + 1}" th:if="*{next}" style="color: black"><code>></code></a>
             </div>
             <form th:action="@{/admin/userlist}" th:object="${criteria}" name="pageForm">
               <input type="hidden" th:field="*{page}">

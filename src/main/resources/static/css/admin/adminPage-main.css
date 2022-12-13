@@ -358,3 +358,26 @@ table.type09 td {
   vertical-align: top;
   border-bottom: 1px solid #ccc;
 }
+
+/* 페이징 버튼 */
+
+code {
+  font-size: large;
+}
+
+.paging {
+  margin-top: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.paging a{
+  padding: 10px;
+}
+
+#currentPage{
+  padding: 10px;
+  font-size: 21px;
+  font-weight: bolder;
+}

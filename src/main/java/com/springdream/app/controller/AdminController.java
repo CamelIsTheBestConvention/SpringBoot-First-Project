@@ -52,7 +52,7 @@ public class AdminController {
 
     // 유저 리스트
     @GetMapping("userlist")
-    public String userList(Criteria criteria,Model model){
+    public String userList(Criteria criteria, Model model){
         // 페이지 번호가 없을 때, 디폴트 1페이지
         if(criteria.getPage() == 0){
             criteria.create(1, 10);
@@ -98,9 +98,14 @@ public class AdminController {
 
     // 게시글 목록
     @GetMapping("boards")
-    public String boards(Model model){
-        int totalBoardCount = adminBoardService.showAll().size();
-        model.addAttribute("boards", adminBoardService.showAll());
+    public String boards(Criteria criteria, Model model){
+        // 페이지 번호가 없을 때, 디폴트 1페이지
+        if(criteria.getPage() == 0){
+            criteria.create(1, 10);
+        }
+        int totalBoardCount = adminBoardService.countTotal();
+        model.addAttribute("boards", adminBoardService.showAll(criteria));
+        model.addAttribute("pagination", new PageDTO().createPageDTO(criteria, totalBoardCount));
         model.addAttribute("totalBoardCount", totalBoardCount);
         return "admin/adminPage-post";
     }
@@ -108,30 +113,30 @@ public class AdminController {
     @PostMapping("boards/search.category")
     public String searchBoardByCategory(String boardCategory, Model model){
 
-        int totalBoardCount = adminBoardService.showAll().size();
+//        int totalBoardCount = adminBoardService.showAll().size();
         if (!boardCategory.equals("")) {
             model.addAttribute("boards", adminBoardService.categoryPost(boardCategory));
 
         } else {
             model.addAttribute("boards", null);
         }
-        model.addAttribute("totalBoardCount", totalBoardCount);
+//        model.addAttribute("totalBoardCount", totalBoardCount);
         return "admin/adminPage-post";
     }
 
     @PostMapping("boards/search.number")
     public String searchBoardByNum(String boardNumber, Model model){
-        if (!boardNumber.equals("")) {
-            Long num = Long.parseLong(boardNumber);
-            int totalBoardCount = adminBoardService.showAll().size();
-
-            model.addAttribute("boards", adminBoardService.show(num));
-            model.addAttribute("totalBoardCount", totalBoardCount);
-        } else {
-            int totalBoardCount = adminBoardService.showAll().size();
-            model.addAttribute("boards", adminBoardService.showAll());
-            model.addAttribute("totalBoardCount", totalBoardCount);
-        }
+//        if (!boardNumber.equals("")) {
+//            Long num = Long.parseLong(boardNumber);
+//            int totalBoardCount = adminBoardService.showAll().size();
+//
+//            model.addAttribute("boards", adminBoardService.show(num));
+//            model.addAttribute("totalBoardCount", totalBoardCount);
+//        } else {
+//            int totalBoardCount = adminBoardService.showAll().size();
+//            model.addAttribute("boards", adminBoardService.showAll());
+//            model.addAttribute("totalBoardCount", totalBoardCount);
+//        }
         return "admin/adminPage-post";
 
     }
