@@ -44,12 +44,27 @@
 
     <!--  게시글 전체 조회  -->
     <select id="selectAll" resultType="boardDTO">
-        SELECT b.BOARD_NUMBER, b.BOARD_TITLE, b.BOARD_CONTENT, b.BOARD_REWARD, b.BOARD_CATEGORY,
-        b.BOARD_DATE, b.BOARD_UPDATE_DATE, b.BOARD_VIEWCOUNT,
-        b.BOARD_ADOPT, b.BOARD_REPORT, b.MEMBER_NUMBER, m.MEMBER_ID, m.MEMBER_NAME, m.MEMBER_RANK
-        FROM TBL_BOARD b
-        INNER JOIN TBL_MEMBER m
-        ON b.MEMBER_NUMBER = m.MEMBER_NUMBER
+        SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_REWARD, BOARD_CATEGORY, BOARD_DATE, BOARD_UPDATE_DATE, BOARD_VIEWCOUNT, BOARD_ADOPT, BOARD_REPORT,
+        MEMBER_ID, MEMBER_NAME, MEMBER_RANK FROM
+        (
+            SELECT ROWNUM R, BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_REWARD, BOARD_CATEGORY, BOARD_DATE, BOARD_UPDATE_DATE, BOARD_VIEWCOUNT, BOARD_ADOPT, BOARD_REPORT,
+            MEMBER_ID, MEMBER_NAME, MEMBER_RANK FROM
+            (
+                SELECT b.BOARD_NUMBER, b.BOARD_TITLE, b.BOARD_CONTENT, b.BOARD_REWARD, b.BOARD_CATEGORY, b.BOARD_DATE, b.BOARD_UPDATE_DATE, b.BOARD_VIEWCOUNT, b.BOARD_ADOPT, b.BOARD_REPORT,
+       			m.MEMBER_ID, m.MEMBER_NAME, m.MEMBER_RANK
+                FROM TBL_BOARD b
+                INNER JOIN TBL_MEMBER m
+                ON b.MEMBER_NUMBER = m.MEMBER_NUMBER
+                ORDER BY BOARD_NUMBER DESC
+            ) D1
+            <![CDATA[
+            WHERE ROWNUM <= #{page} * #{amount}
+        ) WHERE R > (#{page} - 1) * #{amount} ]]>
+    </select>
+
+    <!--  게시글 전체 갯수 조회  -->
+    <select id="countTotal" resultType="_int">
+        SELECT COUNT(BOARD_NUMBER) FROM TBL_BOARD
     </select>
 
     <!--  마이페이지 회원 게시글 전체 조회  -->

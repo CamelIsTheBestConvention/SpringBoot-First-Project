@@ -2,6 +2,7 @@ package com.springdream.app.service;
 
 import com.springdream.app.domain.BoardDTO;
 import com.springdream.app.domain.BoardVO;
+import com.springdream.app.domain.Criteria;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface BoardService {
     public List<BoardDTO> showMemberBoardAll(Long memberNumber);
 
     //    전체 조회
-    public List<BoardDTO> showAll();
+    public List<BoardDTO> showAll(Criteria criteria);
     //    인기글 조회
     public List<BoardDTO> popularPost();
     //    최신글 조회

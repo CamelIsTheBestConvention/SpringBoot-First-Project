@@ -2,6 +2,7 @@ package com.springdream.app.service;
 
 import com.springdream.app.domain.BoardDTO;
 import com.springdream.app.domain.BoardVO;
+import com.springdream.app.domain.Criteria;
 import com.springdream.app.repository.BoardDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class MypageBoardService implements BoardService{
     }
 
     @Override
-    public List<BoardDTO> showAll() {
+    public List<BoardDTO> showAll(Criteria criteria) {
         return null;
     }
 

@@ -2,6 +2,7 @@ package com.springdream.app.mapper;
 
 import com.springdream.app.domain.BoardDTO;
 import com.springdream.app.domain.BoardVO;
+import com.springdream.app.domain.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,7 +28,10 @@ public interface BoardMapper {
     public List<BoardDTO> selectUnreportAll();
 
     //    전체 조회
-    public List<BoardDTO> selectAll();
+    public List<BoardDTO> selectAll(Criteria criteria);
+
+    //게시글 전체 갯수 조회
+    public int countTotal();
 
     //    인기글 조회
     public List<BoardDTO> popularBoard();

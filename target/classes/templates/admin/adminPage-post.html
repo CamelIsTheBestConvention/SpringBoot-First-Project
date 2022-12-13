@@ -109,31 +109,21 @@
                                 </th:block>
                             </tbody>
                         </table>
-                        <!-- 페이지 버튼 -->
                     </div>
-                    <div class="page-btn">
-                        <button class="img-btn">
-                            <img src="/img/admin/prevPage-btn1.png" alt="prevPage" />
-                        </button>
-                        <button class="img-btn">
-                            <img src="/img/admin/prev-btn.png" alt="prev" />
-                        </button>
-                        <button class="move-btn">1</button>
-                        <button class="move-btn">2</button>
-                        <button class="move-btn">3</button>
-                        <button class="move-btn">4</button>
-                        <button class="move-btn">5</button>
-                        <button class="move-btn">6</button>
-                        <button class="move-btn">7</button>
-                        <button class="move-btn">8</button>
-                        <button class="move-btn">9</button>
-                        <button class="move-btn">10</button>
-                        <button class="img-btn">
-                            <img src="/img/admin/next-btn.png" alt="next" />
-                        </button>
-                        <button class="img-btn">
-                            <img src="/img/admin/nextpage-btn.png" alt="nextPage" />
-                        </button>
+                    <!-- 페이지 버튼 -->
+                    <div th:object="${pagination}">
+                        <div class="paging" style="text-align: center">
+                            <a class="changePage" th:href="*{startPage - 1}" th:if="*{prev}" style="color: black"><code><</code></a>
+                            <th:block th:each="page:${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                                <a class="changePage" style="color: black" th:href="${page}" th:if="${pagination.criteria.page != page}"><code th:text="${page}"></code></a>
+                                <code id="currentPage" th:unless="${pagination.criteria.page != page}" th:text="${page}"></code>
+                            </th:block>
+                            <a class="changePage" th:href="*{endPage + 1}" th:if="*{next}" style="color: black"><code>></code></a>
+                        </div>
+                        <form th:action="@{/admin/boards}" th:object="${criteria}" name="pageForm">
+                            <input type="hidden" th:field="*{page}">
+                            <input type="hidden" th:field="*{amount}">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -143,5 +133,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="/js/admin/admin-main.js"></script>
 <script src="/js/admin/admin-post.js"></script>
 </html>
